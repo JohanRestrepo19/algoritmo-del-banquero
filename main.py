@@ -1,7 +1,7 @@
 from modelo import Banquero
 from vista import Ventana
 
-def main():
+def main() -> None:
     # # existentes = [6,3,4,2]
     # # asignados = [
     # #     [3,0,1,1],

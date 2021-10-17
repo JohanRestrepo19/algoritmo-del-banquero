@@ -1,4 +1,4 @@
-def suma_listas(lista1, lista2):
+def suma_listas(lista1:list, lista2:list) -> list:
     resultado = []
     acc = 0
     for i in range(len(lista1)):
@@ -6,7 +6,7 @@ def suma_listas(lista1, lista2):
         resultado.append(acc)
     return resultado
 
-def resta_listas(lista1, lista2):
+def resta_listas(lista1:list, lista2:list) -> list:
     resultado = []
     acc = 0
     for i in range(len(lista1)):
@@ -14,6 +14,6 @@ def resta_listas(lista1, lista2):
         resultado.append(acc)
     return resultado
 
-def imprimir_matriz(matriz):
+def imprimir_matriz(matriz: list) -> None:
     for lista in matriz:
         print(lista)

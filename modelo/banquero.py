@@ -12,7 +12,7 @@ class Banquero():
                                 los recursos solicitados por cada proceso 
     '''
 
-    def __init__(self, existentes, asignados, solicitados):
+    def __init__(self, existentes: list, asignados: list, solicitados: list):
         self.existentes = existentes
         self.asignados = asignados
         self.solicitados = solicitados
@@ -20,7 +20,7 @@ class Banquero():
         self.poseidos = self.calcular_recursos_poseidos()
         self.disponibles = self.calcular_disonibles()
 
-    def correr_banquero(self):
+    def correr_banquero(self) -> str:
         while not self.procesos_despachados():
             solicitud_recursos = self.buscar_solicitud()
             if solicitud_recursos == None:
@@ -31,10 +31,10 @@ class Banquero():
         return f'El estado inicial es seguro'
 
 
-    def procesos_despachados(self):
+    def procesos_despachados(self) -> bool:
         return all(self.acabado)
 
-    def buscar_solicitud(self):
+    def buscar_solicitud(self) -> list | None:
         # buscar en la matriz de solicitudes un proceso que sus recursos sea menor o igual que el vector
         # de recursos disponibles
         existe_solictud = None
@@ -56,7 +56,7 @@ class Banquero():
 
         return existe_solictud
 
-    def iterar(self, solicitud_proceso):
+    def iterar(self, solicitud_proceso: list) -> None:
         index = self.solicitados.index(solicitud_proceso)
         
         self.asignados[index] = suma_listas(self.asignados[index], solicitud_proceso)
@@ -72,7 +72,7 @@ class Banquero():
 
 
 
-    def calcular_recursos_poseidos(self):
+    def calcular_recursos_poseidos(self) -> list:
         poseidos = [0 for x in range(len(self.existentes))]
 
         for j, proceso in enumerate(self.asignados):
@@ -84,7 +84,7 @@ class Banquero():
 
         return poseidos
 
-    def calcular_disonibles(self):
+    def calcular_disonibles(self) -> list:
         disponibles = [0 for x in range(len(self.existentes))]
         for i, recurso_existente in enumerate(self.existentes):
             disponibles[i] = recurso_existente - self.poseidos[i] 
@@ -92,7 +92,7 @@ class Banquero():
         return disponibles
 
     
-    def imprimir_estado(self):
+    def imprimir_estado(self) -> None:
         print('=============================================')
         print(f'Recursos existentes:     {self.existentes}')
         print(f'Recursos poseidos:       {self.poseidos}')

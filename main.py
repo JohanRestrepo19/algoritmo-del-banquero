@@ -37,7 +37,6 @@ def main() -> None:
     # print(banquero.correr_banquero())
 
     ventana = Ventana()
-    ventana.mainloop()
-
+    
 if __name__ == '__main__':
     main()

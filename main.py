@@ -1,42 +1,20 @@
-from modelo import Banquero
-from vista import Ventana
+from controlador import ControladorBanquero
+from helpers import convertir_str_lista, convertir_str_matriz, imprimir_matriz
+
+
 
 def main() -> None:
-    # # existentes = [6,3,4,2]
-    # # asignados = [
-    # #     [3,0,1,1],
-    # #     [0,1,0,0],
-    # #     [1,1,1,0],
-    # #     [1,1,0,1],
-    # #     [0,0,0,0]
-    # # ]
-
-    # # solicitados = [
-    # #     [1,1,0,0],
-    # #     [0,1,1,2],
-    # #     [3,1,0,0],
-    # #     [0,0,1,0],
-    # #     [2,1,1,0]
-    # # ]
-
-    # existentes = [4,2,3,1]
-    # asignados = [
-    #     [0,0,1,0],
-    #     [2,0,0,1],
-    #     [0,1,2,0]
-    # ]
-
-    # solicitados = [
-    #     [2,0,0,1],
-    #     [1,0,1,0],
-    #     [2,1,0,0]
-    # ]
+    controlador = ControladorBanquero()
+    controlador.main()
+    # str = '3 0 1 1 0 1 0 0 1 1 1 0 1 1 0 1 0 0 0 0'
+    # try:
+    #     imprimir_matriz(convertir_str_matriz(str, 4))
+    # except ValueError as e:
+    #     print(f'Hubo un error: {e}')
+    # finally:
+    #     print(str)
+        
 
 
-    # banquero = Banquero(existentes, asignados, solicitados)
-    # print(banquero.correr_banquero())
-
-    ventana = Ventana()
-    
 if __name__ == '__main__':
     main()

@@ -2,8 +2,9 @@ import tkinter as tk
 from tkinter import ttk
 
 class Ventana(tk.Tk):
-    def __init__(self, master=None):
+    def __init__(self, controlador, master=None):
         tk.Tk.__init__(self, master)
+        self.controlador = controlador
         self.title('Ejemplo de ventana')
         self.resizable(False, False)
         self.cadena_existentes = tk.StringVar()
@@ -11,11 +12,19 @@ class Ventana(tk.Tk):
         self.cadena_solicitados = tk.StringVar()
         self.__crear_marco_principal()
         self.__crear_widgets()
+
+    def correr_ventana(self):
         self.mainloop()
 
     def __crear_marco_principal(self):
         self.marco_principal = ttk.Frame(self)
         self.marco_principal.pack(padx=10, pady=10)
+
+    def __crear_widgets(self):
+        self.__crear_widgets_existentes()
+        self.__crar_widgets_matrices()
+        self.__crear_widgets_botones()
+        self.__crear_widgets_resultado()
 
     def __crear_widgets_existentes(self):
         marco_existentes = ttk.LabelFrame(self.marco_principal)
@@ -43,24 +52,23 @@ class Ventana(tk.Tk):
     def __crear_widgets_botones(self):
         marco_botones = ttk.LabelFrame(self.marco_principal)
         marco_botones.pack(padx=5, pady=5)
-        boton_correr = ttk.Button(marco_botones, text='Correr')
+        boton_correr = ttk.Button(
+            marco_botones, 
+            text='Correr',
+            command = self.controlador.presionando_boton
+            )
         boton_correr.grid(row=0, column=0)
 
     def __crear_widgets_resultado(self):
         marco_resultado = ttk.LabelFrame(self.marco_principal)
         marco_resultado.pack(padx=5, pady=5)
 
-        texto_resultado = tk.Text(
+        self.texto_resultado = tk.Text(
             marco_resultado,
             height=2,
             width=50,
-            state='disabled'
+            # state='disabled'
             )
 
-        texto_resultado.grid(row=0, column=0)
+        self.texto_resultado.grid(row=0, column=0)
 
-    def __crear_widgets(self):
-        self.__crear_widgets_existentes()
-        self.__crar_widgets_matrices()
-        self.__crear_widgets_botones()
-        self.__crear_widgets_resultado()

@@ -1,6 +1,8 @@
+from tkinter import INSERT, END
 from vista import Ventana
 from modelo import Banquero
-from tkinter import INSERT, END
+from helpers import convertir_str_lista, convertir_str_matriz
+
 
 class ControladorBanquero:
     def __init__(self):
@@ -11,47 +13,24 @@ class ControladorBanquero:
         self.ventana.correr_ventana()
 
     def presionando_boton(self):
-        self.ventana.texto_resultado.delete(1.0, END)
-        
-        self.ventana.texto_resultado.insert(INSERT, self.ventana.cadena_existentes.get())
-        
-    
+        resultado = ''
+        cadena_existentes = self.ventana.entrada_exitentes.get()
+        cadena_solicitados = self.ventana.entrada_solicitados.get(1.0, END)
+        cadena_asignados = self.ventana.entrada_asignados.get(1.0, END)
 
-
-
-
-
-    # # existentes = [6,3,4,2]
-    # # asignados = [
-    # #     [3,0,1,1],
-    # #     [0,1,0,0],
-    # #     [1,1,1,0],
-    # #     [1,1,0,1],
-    # #     [0,0,0,0]
-    # # ]
-
-    # # solicitados = [
-    # #     [1,1,0,0],
-    # #     [0,1,1,2],
-    # #     [3,1,0,0],
-    # #     [0,0,1,0],
-    # #     [2,1,1,0]
-    # # ]
-
-    # existentes = [4,2,3,1]
-    # asignados = [
-    #     [0,0,1,0],
-    #     [2,0,0,1],
-    #     [0,1,2,0]
-    # ]
-
-    # solicitados = [
-    #     [2,0,0,1],
-    #     [1,0,1,0],
-    #     [2,1,0,0]
-    # ]
-
-
-    # banquero = Banquero(existentes, asignados, solicitados)
-    # print(banquero.correr_banquero())
-
+        try:
+            existentes = convertir_str_lista(cadena_existentes)
+            solicitados = convertir_str_matriz(
+                cadena_solicitados, len(existentes))
+            asignados = convertir_str_matriz(cadena_asignados, len(existentes))
+            banquero = Banquero(existentes, asignados, solicitados)
+            resultado = banquero.correr_banquero()
+        except ValueError as e:
+            resultado = f'Los valores de entrada deben ser enteros. Error: {e}'
+            print(resultado)
+        except Exception as e:
+            resultado = f'Hubo un error, por favor verifique las entradas. Error {e}'
+            print(resultado)
+        finally:
+            self.ventana.texto_resultado.delete(1.0, END)
+            self.ventana.texto_resultado.insert(INSERT, resultado)

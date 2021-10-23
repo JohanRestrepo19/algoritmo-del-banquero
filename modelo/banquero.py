@@ -1,10 +1,11 @@
 from helpers import *
 
+
 class Banquero():
     '''
     m --> cantidad de recursos
     n --> cantidad de procesos
-    
+
     self.disponibles = [m]   --> lista de tamaño m
     self.asignados = [n, m] --> matriz de n(procesos) filas por m(recursos) columnas que representa los
                                 los recursos asignados a cada proceso
@@ -25,11 +26,10 @@ class Banquero():
             solicitud_recursos = self.buscar_solicitud()
             if solicitud_recursos == None:
                 return f'El estado inicial no es seguro'
-            
+
             self.iterar(solicitud_recursos)
 
         return f'El estado inicial es seguro'
-
 
     def procesos_despachados(self) -> bool:
         return all(self.acabado)
@@ -50,7 +50,7 @@ class Banquero():
 
                 if i == len(solicitud) - 1:
                     existe_solictud = solicitud
-            
+
             if existe_solictud != None:
                 return existe_solictud
 
@@ -58,8 +58,9 @@ class Banquero():
 
     def iterar(self, solicitud_proceso: list) -> None:
         index = self.solicitados.index(solicitud_proceso)
-        
-        self.asignados[index] = suma_listas(self.asignados[index], solicitud_proceso)
+
+        self.asignados[index] = suma_listas(
+            self.asignados[index], solicitud_proceso)
         self.poseidos = self.calcular_recursos_poseidos()
         self.disponibles = resta_listas(self.existentes, self.poseidos)
         self.imprimir_estado()
@@ -69,8 +70,6 @@ class Banquero():
         self.asignados[index] = ['x' for x in self.asignados]
         self.solicitados[index] = ['x' for x in self.solicitados]
         self.imprimir_estado()
-
-
 
     def calcular_recursos_poseidos(self) -> list:
         poseidos = [0 for x in range(len(self.existentes))]
@@ -87,11 +86,10 @@ class Banquero():
     def calcular_disonibles(self) -> list:
         disponibles = [0 for x in range(len(self.existentes))]
         for i, recurso_existente in enumerate(self.existentes):
-            disponibles[i] = recurso_existente - self.poseidos[i] 
+            disponibles[i] = recurso_existente - self.poseidos[i]
 
         return disponibles
 
-    
     def imprimir_estado(self) -> None:
         print('=============================================')
         print(f'Recursos existentes:     {self.existentes}')

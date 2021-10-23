@@ -7,9 +7,6 @@ class Ventana(tk.Tk):
         self.controlador = controlador
         self.title('Ejemplo de ventana')
         self.resizable(False, False)
-        self.cadena_existentes = tk.StringVar()
-        self.cadena_asignados = tk.StringVar()
-        self.cadena_solicitados = tk.StringVar()
         self.__crear_marco_principal()
         self.__crear_widgets()
 
@@ -32,8 +29,8 @@ class Ventana(tk.Tk):
 
         etiqueta_exitentes = ttk.Label(marco_existentes, text='Rescursos existentes')
         etiqueta_exitentes.grid(row=0, column=0)
-        entrada_exitentes = ttk.Entry(marco_existentes, textvariable=self.cadena_existentes)
-        entrada_exitentes.grid(row=1, column=0)
+        self.entrada_exitentes = ttk.Entry(marco_existentes)
+        self.entrada_exitentes.grid(row=1, column=0)
 
     def __crar_widgets_matrices(self):
         marco_matrices = ttk.LabelFrame(self.marco_principal)
@@ -41,13 +38,21 @@ class Ventana(tk.Tk):
 
         etiqueta_asignados = ttk.Label(marco_matrices, text='Recursos asignados')
         etiqueta_asignados.grid(row=0, column=0)
-        entrada_asignados = ttk.Entry(marco_matrices, textvariable=self.cadena_asignados)
-        entrada_asignados.grid(row=1, column=0)
+        self.entrada_asignados = tk.Text(
+            marco_matrices, 
+            height=4,
+            width=20,
+            )
+        self.entrada_asignados.grid(row=1, column=0)
 
         etiqueta_solicitados = ttk.Label(marco_matrices, text='Recursos solicitados')
         etiqueta_solicitados.grid(row=0, column=1)
-        entrada_solicitados = ttk.Entry(marco_matrices, textvariable=self.cadena_solicitados)
-        entrada_solicitados.grid(row=1, column=1)
+        self.entrada_solicitados = tk.Text(
+            marco_matrices, 
+            height=4,
+            width=20,
+            )
+        self.entrada_solicitados.grid(row=1, column=1)
 
     def __crear_widgets_botones(self):
         marco_botones = ttk.LabelFrame(self.marco_principal)
@@ -65,7 +70,7 @@ class Ventana(tk.Tk):
 
         self.texto_resultado = tk.Text(
             marco_resultado,
-            height=2,
+            height=4,
             width=50,
             # state='disabled'
             )

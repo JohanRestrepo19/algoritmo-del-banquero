@@ -24,12 +24,12 @@ class Banquero():
     def correr_banquero(self) -> str:
         while not self.procesos_despachados():
             solicitud_recursos = self.buscar_solicitud()
-            if solicitud_recursos == None:
-                return f'El estado inicial no es seguro'
+            if solicitud_recursos is None:
+                return 'El estado inicial no es seguro'
 
             self.iterar(solicitud_recursos)
 
-        return f'El estado inicial es seguro'
+        return 'El estado inicial es seguro'
 
     def procesos_despachados(self) -> bool:
         return all(self.acabado)
@@ -51,7 +51,7 @@ class Banquero():
                 if i == len(solicitud) - 1:
                     existe_solictud = solicitud
 
-            if existe_solictud != None:
+            if existe_solictud is not None:
                 return existe_solictud
 
         return existe_solictud
@@ -98,9 +98,9 @@ class Banquero():
         print()
         print(f'Procesos terminados:     {self.acabado}')
         print()
-        print(f'Recursos asignados')
+        print('Recursos asignados')
         imprimir_matriz(self.asignados)
         print()
-        print(f'Recursos solicitados')
+        print('Recursos solicitados')
         imprimir_matriz(self.solicitados)
         print('=============================================')

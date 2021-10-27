@@ -6,11 +6,14 @@ class Banquero():
     m --> cantidad de recursos
     n --> cantidad de procesos
 
-    self.disponibles = [m]   --> lista de tamaño m
-    self.asignados = [n, m] --> matriz de n(procesos) filas por m(recursos) columnas que representa los
+    self.existentes = [m]       --> Recursos maximos disponibles para la ejecución del programa
+    self.disponibles = [m]      --> lista de tamaño m
+    self.asignados = [n, m]     --> matriz de n(procesos) filas por m(recursos) columnas que representa los
                                 los recursos asignados a cada proceso
-    self.solicitados = [n, m] --> matriz de n(procesos) filas por m(recursos) columnas que representa los
-                                los recursos solicitados por cada proceso 
+    self.solicitados = [n, m]   --> matriz de n(procesos) filas por m(recursos) columnas que representa los
+                                los recursos solicitados por cada proceso
+    self.poseidos = [m] --> lista con el total de recursos poseidos para cada tipo de recurso (menor 
+                            o igual que la lista de existentes)
     '''
 
     def __init__(self, existentes: list, asignados: list, solicitados: list):
@@ -59,31 +62,35 @@ class Banquero():
     def iterar(self, solicitud_proceso: list) -> None:
         index = self.solicitados.index(solicitud_proceso)
 
-        self.asignados[index] = suma_listas(
-            self.asignados[index], solicitud_proceso)
+        self.asignados[index] = suma_listas(self.asignados[index], solicitud_proceso)
         self.poseidos = self.calcular_recursos_poseidos()
         self.disponibles = resta_listas(self.existentes, self.poseidos)
         self.imprimir_estado()
         self.disponibles = suma_listas(self.disponibles, self.asignados[index])
         self.acabado[index] = True
         self.poseidos = self.calcular_recursos_poseidos()
-        self.asignados[index] = ['x' for x in self.asignados]
-        self.solicitados[index] = ['x' for x in self.solicitados]
+        self.asignados[index] = ['x' for x in self.asignados[index]]
+        self.solicitados[index] = ['x' for x in self.solicitados[index]]
         self.imprimir_estado()
 
     def calcular_recursos_poseidos(self) -> list:
+        # Se inicializa la lista de poseidos en 0 para cada recurso
         poseidos = [0 for x in range(len(self.existentes))]
 
+        # Se itera en todos los procesos que no hayan terminado
         for j, proceso in enumerate(self.asignados):
             if self.acabado[j]:
                 continue
-
+            
+            # Se acumula el valor para cada recurso en su posición
+            # correspondiente
             for i, recurso in enumerate(proceso):
                 poseidos[i] += recurso
 
         return poseidos
 
     def calcular_disonibles(self) -> list:
+        # Se inicializa la lista de disponibles en 0 para cada recurso
         disponibles = [0 for x in range(len(self.existentes))]
         for i, recurso_existente in enumerate(self.existentes):
             disponibles[i] = recurso_existente - self.poseidos[i]

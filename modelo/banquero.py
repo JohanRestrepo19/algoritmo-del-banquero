@@ -1,4 +1,4 @@
-from helpers import *
+from helpers import suma_listas, resta_listas,imprimir_matriz
 
 
 class Banquero():
@@ -65,7 +65,6 @@ class Banquero():
         self.asignados[index] = suma_listas(self.asignados[index], solicitud_proceso)
         self.poseidos = self.calcular_recursos_poseidos()
         self.disponibles = resta_listas(self.existentes, self.poseidos)
-        self.imprimir_estado()
         self.disponibles = suma_listas(self.disponibles, self.asignados[index])
         self.acabado[index] = True
         self.poseidos = self.calcular_recursos_poseidos()

@@ -1,7 +1,7 @@
 def suma_listas(lista1: list, lista2: list) -> list:
     resultado = []
     acc = 0
-    for i in range(len(lista1)):
+    for i, _ in enumerate(lista1):
         acc = lista1[i] + lista2[i]
         resultado.append(acc)
     return resultado
@@ -10,7 +10,7 @@ def suma_listas(lista1: list, lista2: list) -> list:
 def resta_listas(lista1: list, lista2: list) -> list:
     resultado = []
     acc = 0
-    for i in range(len(lista1)):
+    for i, _ in enumerate(lista1):
         acc = lista1[i] - lista2[i]
         resultado.append(acc)
     return resultado

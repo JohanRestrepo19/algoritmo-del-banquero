@@ -70,8 +70,8 @@ class Ventana(tk.Tk):
 
         self.texto_resultado = tk.Text(
             marco_resultado,
-            height=4,
-            width=50,
+            height=10,
+            width=70,
             # state='disabled'
             )
 

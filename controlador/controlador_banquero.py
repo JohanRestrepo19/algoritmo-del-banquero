@@ -13,7 +13,8 @@ class ControladorBanquero:
         self.ventana.correr_ventana()
 
     def presionando_boton(self):
-        resultado = ''
+        resultado = None
+        cadena_resultado = ''
         cadena_existentes = self.ventana.entrada_exitentes.get()
         cadena_solicitados = self.ventana.entrada_solicitados.get(1.0, END)
         cadena_asignados = self.ventana.entrada_asignados.get(1.0, END)
@@ -25,12 +26,21 @@ class ControladorBanquero:
             asignados = convertir_str_matriz(cadena_asignados, len(existentes))
             banquero = Banquero(existentes, asignados, solicitados)
             resultado = banquero.correr_banquero()
+
+            for cadena in resultado:
+                cadena_resultado += cadena
+                
+
         except ValueError as e:
-            resultado = f'Los valores de entrada deben ser enteros. Error: {e}'
+            cadena_resultado = f'Los valores de entrada deben ser enteros. Error: {e}'
             print(resultado)
         except Exception as e:
-            resultado = f'Hubo un error, por favor verifique las entradas. Error {e}'
+            cadena_resultado = f'Hubo un error, por favor verifique las entradas. Error {e}'
             print(resultado)
         finally:
             self.ventana.texto_resultado.delete(1.0, END)
-            self.ventana.texto_resultado.insert(INSERT, resultado)
+            self.ventana.texto_resultado.insert(INSERT, cadena_resultado)
+
+
+            print('/////////////////////')
+            print(cadena_resultado)

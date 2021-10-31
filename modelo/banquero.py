@@ -23,6 +23,7 @@ class Banquero():
         self.acabado = [False for x in range(len(self.asignados))]
         self.poseidos = self.calcular_recursos_poseidos()
         self.disponibles = self.calcular_disonibles()
+        self.ls_estados = []
 
     def correr_banquero(self) -> str:
         while not self.procesos_despachados():
@@ -32,7 +33,8 @@ class Banquero():
 
             self.iterar(solicitud_recursos)
 
-        return 'El estado inicial es seguro'
+        # return 'El estado inicial es seguro'
+        return self.ls_estados
 
     def procesos_despachados(self) -> bool:
         return all(self.acabado)
@@ -68,9 +70,20 @@ class Banquero():
         self.disponibles = suma_listas(self.disponibles, self.asignados[index])
         self.acabado[index] = True
         self.poseidos = self.calcular_recursos_poseidos()
-        self.asignados[index] = ['x' for x in self.asignados[index]]
-        self.solicitados[index] = ['x' for x in self.solicitados[index]]
+        self.asignados[index] = ['x' for x in self.asignados]
+        self.solicitados[index] = ['x' for x in self.solicitados]
+        self.ls_estados.append(self.guardar_estado(index + 1))
         self.imprimir_estado()
+
+    def guardar_estado(self, recurso_despachado: int) -> str:
+        return (
+            f'Recursos existentes: {self.existentes}\n'
+            f'Recursos poseidos:   {self.poseidos}\n'
+            f'Recursos disponibles:{self.disponibles}\n'
+            f'Recurso despachado:  {recurso_despachado}\n'
+            f'Procesos terminados: {self.acabado}\n'
+            f'---------------------------------------------\n'
+        )
 
     def calcular_recursos_poseidos(self) -> list:
         # Se inicializa la lista de poseidos en 0 para cada recurso

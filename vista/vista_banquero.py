@@ -5,7 +5,7 @@ class Ventana(tk.Tk):
     def __init__(self, controlador, master=None):
         tk.Tk.__init__(self, master)
         self.controlador = controlador
-        self.title('Ejemplo de ventana')
+        self.title('Algoritmo banquero')
         self.resizable(False, False)
         self.__crear_marco_principal()
         self.__crear_widgets()

@@ -6,7 +6,7 @@ Para crear una copia local del repositorio se puede ejecutar el siguiente comand
 ```
 git clone https://github.com/JohanRestrepo19/algoritmo-del-banquero.git
 ```
-O simplemente descargar el zip del repositoria desde github.
+O simplemente descargar el zip del repositorio desde github.
 
 ## Requisitos
 1. Tener python 3.6 o superior instalado.

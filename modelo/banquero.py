@@ -33,7 +33,6 @@ class Banquero():
 
             self.iterar(solicitud_recursos)
 
-        # return 'El estado inicial es seguro'
         return self.ls_estados
 
     def procesos_despachados(self) -> bool:
@@ -73,7 +72,7 @@ class Banquero():
         self.asignados[index] = ['x' for x in self.asignados]
         self.solicitados[index] = ['x' for x in self.solicitados]
         self.ls_estados.append(self.guardar_estado(index + 1))
-        self.imprimir_estado()
+        # self.imprimir_estado()
 
     def guardar_estado(self, recurso_despachado: int) -> str:
         return (
@@ -110,6 +109,7 @@ class Banquero():
         return disponibles
 
     def imprimir_estado(self) -> None:
+        '''Función que se utiliza para debuggear el codigo'''
         print('=============================================')
         print(f'Recursos existentes:     {self.existentes}')
         print(f'Recursos poseidos:       {self.poseidos}')

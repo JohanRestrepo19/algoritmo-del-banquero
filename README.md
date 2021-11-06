@@ -13,7 +13,7 @@ O simplemente descargar el zip del repositorio desde github.
 2. Modulo Tkinter de python.
 
 ## Ejecución:
-Para ejecutar el programa se pude utilizar el siguiente instrucción mediante el cmd de windows o la linea de comandos del sistema operativo en el que se encuentre:
+Para ejecutar el programa se pude utilizar la siguiente instrucción mediante el cmd de windows o la linea de comandos del sistema operativo en el que se encuentre:
 ```
 python main.py
 ```

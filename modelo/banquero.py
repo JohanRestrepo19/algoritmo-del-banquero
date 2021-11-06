@@ -38,7 +38,7 @@ class Banquero():
     def procesos_despachados(self) -> bool:
         return all(self.acabado)
 
-    def buscar_solicitud(self) -> list | None:
+    def buscar_solicitud(self) -> list:
         # buscar en la matriz de solicitudes un proceso que sus recursos sea menor o igual que el vector
         # de recursos disponibles
         existe_solictud = None

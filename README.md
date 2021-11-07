@@ -8,9 +8,9 @@ git clone https://github.com/JohanRestrepo19/algoritmo-del-banquero.git
 ```
 O simplemente descargar el zip del repositorio desde github.
 
-## Desarrollado con:
-1. Python 3
-2. Modulo Tkinter de python.
+## Desarrollado en:
+1. Python 3.9
+2. Modulo de interfaces gráficas de usuario Tkinter de python.
 
 ## Ejecución:
 Para ejecutar el programa se pude utilizar la siguiente instrucción mediante el cmd de windows o la linea de comandos del sistema operativo en el que se encuentre:
@@ -18,7 +18,7 @@ Para ejecutar el programa se pude utilizar la siguiente instrucción mediante el
 python main.py
 ```
 
-O también se puede ejecutar el archivo:
+O también se puede ejecutar el archivo pero se debe tener instalada la versión de python 3.9:
 ```
 algoritmo_banquero.exe
 ```
